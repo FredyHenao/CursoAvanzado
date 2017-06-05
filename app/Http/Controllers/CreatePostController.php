@@ -3,6 +3,7 @@
 namespace Foro\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Foro\Post;
 
 class CreatePostController extends Controller
 {
@@ -34,7 +35,9 @@ class CreatePostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post($request->all());
+        auth()->user()->posts()->save($post);
+        return $post->title;
     }
 
     /**
